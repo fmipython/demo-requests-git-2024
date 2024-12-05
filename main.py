@@ -45,10 +45,10 @@ response = requests.get(url, headers=headers, params=querystring)
 response_json = response.json()
 
 
-urls: list[str] = [
-    item["newsUrl"] for item in response_json["items"][:10]
+urls: list[tuple[str, str]] = [
+    (item["title"], item["newsUrl"]) for item in response_json["items"][:10]
 ]
 
-print("\n".join(f"{url}" for url in urls))
+print("\n".join(f"{title}: {url}" for title, url in urls))
 
 
